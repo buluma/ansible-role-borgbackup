@@ -22,12 +22,12 @@
 #     - "{{ ansible_os_family }}.yml"
 
 - name: Install required System Packages
-  package:
+  ansible.builtin.package:
     name: "{{ borg_packages }}"
     state: present
 
 - name: Create virtualenv for borg  # noqa package-latest
-  pip:
+  ansible.builtin.pip:
     name:
       - pip
       - setuptools
@@ -36,19 +36,19 @@
     virtualenv_command: "{{ python_bin }} -m venv"
 
 - name: Install dependent Python Packages
-  pip:
+  ansible.builtin.pip:
     name: "{{ borg_dependent_python_packages }}"
     virtualenv: /opt/borgmatic
   when: borg_dependent_python_packages is defined
 
 - name: Install main Python Packages
-  pip:
+  ansible.builtin.pip:
     name: "{{ borg_python_packages }}"
     virtualenv: /opt/borgmatic
   when: borg_python_packages is defined
 
 - name: Create borgmatic command in /usr/local/bin
-  copy:
+  ansible.builtin.copy:
     content: |
       #!/bin/bash
       . /opt/borgmatic/bin/activate
@@ -59,7 +59,7 @@
     mode: "0755"
 
 - name: Ensure root has SSH key.
-  user:
+  ansible.builtin.user:
     name: "root"
     generate_ssh_key: yes
     ssh_key_file: "{{ ssh_key_file }}"
@@ -67,18 +67,18 @@
   register: root_user
 
 - name: Print key created for root user (use for remote repo)
-  debug:
+  ansible.builtin.debug:
     var: root_user['ssh_public_key']
 
 - name: Ensure /etc/borgmatic exists
-  file:
+  ansible.builtin.file:
     path: /etc/borgmatic
     state: directory
     mode: 0700
     owner: root
 
 - name: Add Borgmatic configuration
-  template:
+  ansible.builtin.template:
     src: config.yaml.j2
     dest: "/etc/borgmatic/{{ borgmatic_config_name }}"
     mode: 0600
@@ -86,7 +86,7 @@
 - name: Add cron-job for borgmatic (large repo, create and check separate)
   block:
     - name: Add cron job for regular create and prune
-      cron:
+      ansible.builtin.cron:
         name: "{{ borgmatic_cron_name }}"
         hour: "{{ borgmatic_cron_hour }}"
         minute: "{{ borgmatic_cron_minute }}"
@@ -94,7 +94,7 @@
         cron_file: "{{ borgmatic_cron_name }}"
         job: "borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }} -C -p"
     - name: Add cron job for infrequent checks
-      cron:
+      ansible.builtin.cron:
         name: "{{ borgmatic_cron_name }}-check"
         day: "{{ borgmatic_cron_checks_day }}"
         hour: "{{ borgmatic_cron_checks_hour }}"
@@ -107,7 +107,7 @@
 - name: Add cron-job for borgmatic (normal-sized repo)
   block:
     - name: Add cron job for create, check and prune
-      cron:
+      ansible.builtin.cron:
         name: "{{ borgmatic_cron_name }}"
         hour: "{{ borgmatic_cron_hour }}"
         minute: "{{ borgmatic_cron_minute }}"
@@ -115,13 +115,13 @@
         cron_file: "{{ borgmatic_cron_name }}"
         job: "borgmatic -c /etc/borgmatic/{{ borgmatic_config_name }}"
     - name: Ensure separate check cron job is absent
-      cron:
+      ansible.builtin.cron:
         name: "{{ borgmatic_cron_name }}-check"
         state: absent
   when: not borgmatic_large_repo
 
 - name: Set PATH for borgmatic cron job.
-  cron:
+  ansible.builtin.cron:
     user: "root"
     cron_file: "{{ borgmatic_cron_name }}"
     name: PATH
@@ -129,6 +129,6 @@
     value: /usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 - name: Install yamllint for checking config file
-  pip:
+  ansible.builtin.pip:
     name: yamllint
     executable: pip3

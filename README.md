@@ -13,21 +13,6 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 ---
 - name: Converge
   hosts: all
-  # pre_tasks:
-  #   - name: Set ssh server package name for non-Archlinux ansible_os_family
-  #     set_fact:
-  #       openssh_package: "openssh-server"
-  #     when: ansible_os_family != "Archlinux"
-  #
-  #   - name: Set ssh server package name for Archlinux ansible_os_family
-  #     set_fact:
-  #       openssh_package: "openssh"
-  #     when: ansible_os_family == "Archlinux"
-  #
-  #   - name: Install openssh
-  #     package:
-  #       name: "{{ openssh_package }}"
-  #       state: present
 
   roles:
     - role: buluma.borgbackup
@@ -50,12 +35,6 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           - name: users
             hostname: database1.example.org
             port: 5433
-
-  # post_tasks:
-  #   - name: Install yamllint for checking config file
-  #     pip:
-  #       name: yamllint
-  #       executable: pip3
 ```
 
 The machine needs to be prepared. In CI this is done using `molecule/default/prepare.yml`:
