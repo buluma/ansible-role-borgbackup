@@ -49,6 +49,16 @@ jobs:
             tag: "34"
           - image: "fedora-systemd"
             tag: "latest"
+          - image: "debian-systemd"
+            tag: "latest"
+          - image: "debian-systemd"
+            tag: "bookworm"
+          - image: "docker-ubuntu-systemd"
+            tag: "focal"
+          - image: "docker-ubuntu-systemd"
+            tag: "latest"
+          - image: "archlinux"
+            tag: "latest"
     steps:
       - name: checkout
         uses: actions/checkout@v3

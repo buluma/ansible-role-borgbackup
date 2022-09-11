@@ -50,17 +50,17 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
 
   pre_tasks:
     - name: Set ssh server package name for non-Archlinux ansible_os_family
-      set_fact:
+      ansible.builtin.set_fact:
         openssh_package: "openssh-server"
       when: ansible_os_family != "Archlinux"
 
     - name: Set ssh server package name for Archlinux ansible_os_family
-      set_fact:
+      ansible.builtin.set_fact:
         openssh_package: "openssh"
       when: ansible_os_family == "Archlinux"
 
     - name: Install openssh
-      package:
+      ansible.builtin.package:
         name: "{{ openssh_package }}"
         state: present
 ```
@@ -130,6 +130,9 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |container|tags|
 |---------|----|
 |fedora|all|
+|debian|all|
+|ubuntu|focal, jammy|
+|archlinux|all|
 
 The minimum version of Ansible required is 2.1, tests have been done to:
 
