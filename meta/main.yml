@@ -18,9 +18,6 @@ galaxy_info:
       versions:
         - focal
         - jammy
-    - name: Archlinux
-      versions:
-        - all
 
   galaxy_tags:
     - backup

@@ -57,8 +57,6 @@ jobs:
             tag: "focal"
           - image: "docker-ubuntu-systemd"
             tag: "latest"
-          - image: "archlinux"
-            tag: "latest"
     steps:
       - name: checkout
         uses: actions/checkout@v3
