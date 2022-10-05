@@ -49,7 +49,14 @@ jobs:
             tag: "34"
           - image: "fedora-systemd"
             tag: "latest"
-            # TODO: check debian
+          - image: "debian-systemd"
+            tag: "latest"
+          - image: "debian-systemd"
+            tag: "buster"
+          - image: "docker-ubuntu-systemd"
+            tag: "focal"
+          - image: "docker-ubuntu-systemd"
+            tag: "latest"
     steps:
       - name: checkout
         uses: actions/checkout@v3
