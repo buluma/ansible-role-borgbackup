@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-borgbackup/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-borgbackup/compare/0.1.0...HEAD)
+
+**Closed issues:**
+
+- check debian [\#1](https://github.com/buluma/ansible-role-borgbackup/issues/1)
+
 ## [0.1.0](https://github.com/buluma/ansible-role-borgbackup/tree/0.1.0) (2022-09-11)
 
 [Full Changelog](https://github.com/buluma/ansible-role-borgbackup/compare/8d771b0b72e6a8b22b5b12a9e2436d5c323cb73e...0.1.0)
