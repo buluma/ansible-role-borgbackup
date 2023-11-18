@@ -5,4 +5,4 @@
 repository:
   description: Set up backup to remote machine using Borg and Borgmatic.
   homepage: https://buluma.github.io/
-  topics: borgbackup, ansible, molecule, tox, playbook, hacktoberfest
+  topics: backup, ansible, molecule, tox, playbook
