@@ -6,6 +6,7 @@
 
 **Closed issues:**
 
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#7](https://github.com/buluma/ansible-role-borgbackup/issues/7)
 - check debian [\#1](https://github.com/buluma/ansible-role-borgbackup/issues/1)
 
 ## [0.1.0](https://github.com/buluma/ansible-role-borgbackup/tree/0.1.0) (2022-09-11)
