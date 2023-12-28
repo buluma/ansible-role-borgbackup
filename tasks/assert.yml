@@ -1,5 +1,5 @@
 ---
-- name: Ensure legacy hooks aren't used
+- name: assert | Ensure legacy hooks aren't used
   ansible.builtin.assert:
     that:
       - borgmatic_failure_command is undefined
