@@ -44,7 +44,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
+  become: no
   gather_facts: yes
 
   roles:
@@ -164,5 +164,3 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 [Shadow Walker](https://buluma.github.io/)
 
-
-Template inspired by [Robert de Bock](https://github.com/robertdebock)
